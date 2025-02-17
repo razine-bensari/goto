@@ -84,7 +84,7 @@ public final class GameUtils {
 	 * @return boolean indicating if the game ended
 	 */
 	public static boolean gameHasEnded(Game game) {
-		return game.getEndTime() == null;
+		return game.getEndTime() != null;
 	}
 
 	/**
@@ -94,7 +94,7 @@ public final class GameUtils {
 	 * @return a boolean indicating if the game is ready
 	 */
 	public static boolean gameIsReady(Game game) {
-		return !gameInProgress(game) && !gameHasEnded(game);
+		return !gameHasStarted(game) && !gameHasEnded(game);
 	}
 
 }

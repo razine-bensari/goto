@@ -35,7 +35,6 @@ public class GameController {
 
 	public static final String GAME_NOT_FOUND = "Game not found";
 	public static final String PLAYER_NOT_FOUND = "Player not found";
-	public static final String DECK_NOT_FOUND = "Deck not found";
 
 	private final GameService gameService;
 	private final GameOperations gameOperations;
@@ -136,6 +135,10 @@ public class GameController {
 		var game = gameService.getGame(gameId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, GAME_NOT_FOUND));
 		var player = game.getPlayers().stream().filter(p -> p.getId().equals(playerId)).findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PLAYER_NOT_FOUND));
 
+		if (game.getPlayers().stream().noneMatch(p -> p.getId().equals(playerId))) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "the player does not exist in this game");
+		}
+
 		if (!gameIsReady(game)) {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, "Cannot remove a player from a game in progress or completed");
 		}
@@ -144,30 +147,29 @@ public class GameController {
 	}
 
 	@PostMapping("/{gameId}/deal-cards")
-	public Game dealToPlayer(@PathVariable String gameId, @RequestParam String playerId, @RequestParam String deckId) {
-		if (StringUtils.isBlank(deckId)) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing deckId");
-		}
-
+	public Game dealToPlayer(@PathVariable String gameId, @RequestParam String playerId) {
 		if (StringUtils.isBlank(playerId)) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing playerId");
 		}
 
 		var game = gameService.getGame(gameId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, GAME_NOT_FOUND));
 		var player = game.getPlayers().stream().filter(p -> p.getId().equals(playerId)).findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PLAYER_NOT_FOUND));
-		var deck = game.getDecks().stream().filter(d -> d.getId().equals(deckId)).findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, DECK_NOT_FOUND));
 
 		if (!gameInProgress(game)) {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, "Cannot deal cards to player for a game not in progress");
 		}
 
-		return gameOperations.dealCards(player, deck, game);
+		return gameOperations.dealCards(player, game);
 	}
 
 	@GetMapping("/{gameId}/players/{playerId}/cards")
 	public List<Card> getPlayerCards(@PathVariable String gameId, @PathVariable String playerId) {
 		var game = gameService.getGame(gameId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, GAME_NOT_FOUND));
 		var player = game.getPlayers().stream().filter(p -> p.getId().equals(playerId)).findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PLAYER_NOT_FOUND));
+
+		if (game.getPlayers().stream().noneMatch(p -> p.getId().equals(playerId))) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "the player does not exist in this game");
+		}
 
 		if (!gameHasStarted(game)) {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, "Cannot list cards of a player for a game not in progress");

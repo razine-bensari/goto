@@ -6,10 +6,10 @@ server:
 spring:
   application:
     name: game
-
   data:
     mongodb:
-      uri: mongodb://localhost:27017/goto
+      uri: mongodb://localhost:27017/game
+      database: game
 
 api:
   version: v1

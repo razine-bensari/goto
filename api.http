@@ -1,0 +1,71 @@
+### Create a game
+POST http://127.0.0.1:8080/api/api/v1/games
+Accept: application/json
+Content-Type: application/json
+
+### get a game
+GET http://127.0.0.1:8080/api/api/v1/games/67b2ac924b8227038c080d9e
+Accept: application/json
+Content-Type: application/json
+
+### list all games
+GET http://127.0.0.1:8080/api/api/v1/games
+Accept: application/json
+Content-Type: application/json
+
+### delete a game
+DELETE http://127.0.0.1:8080/api/api/v1/games/67b2a80ee6b29d0575503163
+Accept: application/json
+Content-Type: application/json
+
+### add deck to game
+POST http://127.0.0.1:8080/api/api/v1/games/67b2ac924b8227038c080d9e/decks
+Accept: application/json
+Content-Type: application/json
+
+
+### add player to a game
+POST http://127.0.0.1:8080/api/api/v1/games/67b2ac924b8227038c080d9e/players
+Accept: application/json
+Content-Type: application/json
+
+### delete player / remove player from game
+DELETE http://127.0.0.1:8080/api/api/v1/games/67b2a907728ec479e2b77693/players/67b2aa27728ec479e2b77698
+Accept: application/json
+Content-Type: application/json
+
+
+### start a game
+POST http://127.0.0.1:8080/api/api/v1/games/67b2ac924b8227038c080d9e/start
+Accept: application/json
+Content-Type: application/json
+
+### deal card to player in game
+POST http://127.0.0.1:8080/api/api/v1/games/67b2ac924b8227038c080d9e/deal-cards?playerId=67b2aca84b8227038c080dc1&deckId=67b2ac9e4b8227038c080dac
+Accept: application/json
+Content-Type: application/json
+
+### get player cards
+GET http://127.0.0.1:8080/api/api/v1/games/67b2ac924b8227038c080d9e/players/67b2aca84b8227038c080dc1/cards
+Accept: application/json
+Content-Type: application/json
+
+### get players with score
+GET http://127.0.0.1:8080/api/api/v1/games/67b2ac924b8227038c080d9e/players?includeScore=true
+Accept: application/json
+Content-Type: application/json
+
+### get suit count
+GET http://127.0.0.1:8080/api/api/v1/games/67b2ac924b8227038c080d9e/suit-count
+Accept: application/json
+Content-Type: application/json
+
+### get card count
+GET http://127.0.0.1:8080/api/api/v1/games/67b2ac924b8227038c080d9e/card-count
+Accept: application/json
+Content-Type: application/json
+
+### get shuffle
+POST http://127.0.0.1:8080/api/api/v1/games/67b2ac924b8227038c080d9e/shuffle
+Accept: application/json
+Content-Type: application/json

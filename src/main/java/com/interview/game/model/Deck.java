@@ -7,22 +7,22 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document
 public class Deck {
 
 	@Id
-	private String id;
+	private String id = new ObjectId().toString();
 
 	private List<Card> cards = new ArrayList<>();
 
 	public Deck(List<Card> cards) {
 		this.cards = cards;
+		this.id = new ObjectId().toString();
 	}
 }

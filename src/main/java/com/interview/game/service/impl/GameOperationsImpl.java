@@ -57,7 +57,7 @@ public class GameOperationsImpl implements GameOperations {
 	}
 
 	@Override
-	public Game dealCards(Player player, Deck deck, Game game) {
+	public Game dealCards(Player player, Game game) {
 
 		// loop using index to keep order
 		for (int i = 0; i < game.getDecks().size(); i++) {
@@ -86,12 +86,14 @@ public class GameOperationsImpl implements GameOperations {
 	public List<Player> getPlayers(Game game, boolean includeScores) {
 		game.getPlayers()
 				.forEach(player -> {
-					var cards = player.getCards();
-					if (cards.isEmpty()) {
-						player.setScore(0);
-					} else {
-						int totalScore = cards.stream().mapToInt(c -> c.getRank().getValue()).sum();
-						player.setScore(totalScore);
+					if (includeScores) {
+						var cards = player.getCards();
+						if (cards.isEmpty()) {
+							player.setScore(0);
+						} else {
+							int totalScore = cards.stream().mapToInt(c -> c.getRank().getValue()).sum();
+							player.setScore(totalScore);
+						}
 					}
 				});
 
@@ -134,6 +136,8 @@ public class GameOperationsImpl implements GameOperations {
 				Collections.swap(cards, i, j);
 			}
 		});
+
+		gameService.updateGame(game);
 	}
 
 	private Optional<Card> popCardFromDeck(Deck deck) {

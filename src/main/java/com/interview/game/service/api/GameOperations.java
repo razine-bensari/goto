@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import com.interview.game.domain.Card;
 import com.interview.game.domain.Suit;
-import com.interview.game.model.Deck;
 import com.interview.game.model.Game;
 import com.interview.game.model.Player;
 
@@ -43,10 +42,9 @@ public interface GameOperations {
 	 * Deals the cards from the deck to the player of the game
 	 *
 	 * @param player the player that will receive the cards
-	 * @param deck   the targeted deck of the game
 	 * @param game   the game
 	 */
-	Game dealCards(Player player, Deck deck, Game game);
+	Game dealCards(Player player, Game game);
 
 	/**
 	 * Returns the list of players for a given game.

@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   mongodb:
     image: mongo:latest
@@ -7,9 +5,9 @@ services:
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: goto
-      MONGO_INITDB_ROOT_PASSWORD: goto
-      MONGO_INITDB_DATABASE: goto
+      MONGO_INITDB_ROOT_USERNAME: ""
+      MONGO_INITDB_ROOT_PASSWORD: ""
+      MONGO_INITDB_DATABASE: game
     volumes:
       - mongo_data:/data/db
 

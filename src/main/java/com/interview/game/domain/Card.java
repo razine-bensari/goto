@@ -2,6 +2,7 @@ package com.interview.game.domain;
 
 import java.util.Comparator;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,6 +21,8 @@ import org.springframework.data.annotation.Transient;
 public class Card implements Comparable<Card> {
 	private Rank rank;
 	private Suit suit;
+
+	@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 	@Transient
 	private int count;
 
