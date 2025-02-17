@@ -39,6 +39,7 @@ public final class GameUtils {
 
 	/**
 	 * Generate a random alphanumerical string
+	 *
 	 * @param length min length required
 	 * @return the string
 	 */
