@@ -4,12 +4,13 @@ Interview for GoTo
 ## pre-requisite
 - docker (to run docker compose file for mongodb and docker image if needs be)
 - java version 21
-- gradle (8.2 and up)
+- gradle (8.12.1)
 
 ## How to run locally
 - Run the docker compose file first to setup mongodb
 - Then you can either run as a docker image
 - Or, run it within intellij
+- Or, by running `./gradlew bootRun` in the root project dir.
 
 
 ### Assumptions
