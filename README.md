@@ -24,4 +24,4 @@ Some things worth noting:
 - Ideally, if we had the full scope of requirements, we could represent the game as a state machine. Each state could dictate a possible list of operations by the player or the game. That would be really nice to design and code.
 - Some rest apis have structured response and error response type to be gracefully handled in a UI. I did not implement that for time reason. But worth noting it is a good practice.
 - I did not implement authentication. Obviously, a game REST API needs to be properly protected, as well as authorization implemented, so authenticated players can only interact with the game they are registered in.
-- I had plans to implement unit testing as well in groovy with spock, but I decided to do it manually (manual testing using the api.http file - intellij's own http client)
+- I had plans to implement unit testing as well in groovy with spock, but I decided to do it manually (manual testing using the api.http file - intellij's own http client) - I lacked time to add unit tests
