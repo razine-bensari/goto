@@ -9,6 +9,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: goto
       MONGO_INITDB_ROOT_PASSWORD: goto
+      MONGO_INITDB_DATABASE: goto
     volumes:
       - mongo_data:/data/db
 

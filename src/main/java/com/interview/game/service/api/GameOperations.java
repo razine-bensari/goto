@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 import com.interview.game.domain.Card;
 import com.interview.game.domain.Suit;
-import com.interview.game.model.DeckModel;
-import com.interview.game.model.GameModel;
-import com.interview.game.model.PlayerModel;
+import com.interview.game.model.Deck;
+import com.interview.game.model.Game;
+import com.interview.game.model.Player;
 
 /**
  * Represents all the allowed operations of the game card.
@@ -18,10 +18,9 @@ public interface GameOperations {
 	 * Adds a new deck of cards to the given game.
 	 *
 	 * @param game the game in which we add a new deck of cards.
-	 * @param deck the deck to add to the game
 	 * @return the updated game with the new deck of cards
 	 */
-	GameModel addDeck(DeckModel deck, GameModel game);
+	Game addDeck(Game game);
 
 	/**
 	 * Adds a new player to the given game.
@@ -30,7 +29,7 @@ public interface GameOperations {
 	 * @param game   the game in which we are adding a new player
 	 * @return the update game
 	 */
-	GameModel addPlayer(PlayerModel player, GameModel game);
+	Game addPlayer(Player player, Game game);
 
 	/**
 	 * Removes a player from the game.
@@ -38,7 +37,7 @@ public interface GameOperations {
 	 * @param player The player to remove
 	 * @param game   the game where the player is removed
 	 */
-	GameModel removePlayer(PlayerModel player, GameModel game);
+	Game removePlayer(Player player, Game game);
 
 	/**
 	 * Deals the cards from the deck to the player of the game
@@ -47,24 +46,16 @@ public interface GameOperations {
 	 * @param deck   the targeted deck of the game
 	 * @param game   the game
 	 */
-	GameModel dealCards(PlayerModel player, DeckModel deck, GameModel game);
+	Game dealCards(Player player, Deck deck, Game game);
 
 	/**
-	 * Lists all the cards of a player in the game
+	 * Returns the list of players for a given game.
 	 *
-	 * @param player the player in which we want to get the cards from
-	 * @param game   the targeted game
-	 * @return the list of cards
+	 * @param game          the targeted game
+	 * @param includeScores boolean indicating if we want the players to have score as well.
+	 * @return a list of players in the game sorted by highest score with score populated for each player
 	 */
-	List<Card> getCards(PlayerModel player, GameModel game);
-
-	/**
-	 * Computes the score of each player in the game
-	 *
-	 * @param game the targeted game
-	 * @return a map of player to score
-	 */
-	Map<PlayerModel, Integer> getPLayersScore(GameModel game);
+	List<Player> getPlayers(Game game, boolean includeScores);
 
 	/**
 	 * Computes the number of cards per suit in the game deck
@@ -72,20 +63,20 @@ public interface GameOperations {
 	 * @param game the targeted game
 	 * @return a map of suit to count
 	 */
-	Map<Suit, Integer> countDeckCardsPerSuit(GameModel game);
+	Map<Suit, Long> countDeckCardsPerSuit(Game game);
+
+	/**
+	 * Counts the number of cards in the game deck
+	 *
+	 * @param game the targeted game
+	 * @return map of cards sorted by suit then rank with the count as value
+	 */
+	Map<Card, Long> countDeckCardsPerSuitAndRank(Game game);
 
 	/**
 	 * Shuffles the cards in the game deck
 	 *
 	 * @param game the targeted game
 	 */
-	void shuffle(GameModel game);
-
-	/**
-	 * Counts the number of cards in the game deck
-	 *
-	 * @param game the targeted game
-	 * @return map of cards to count
-	 */
-	Map<Card, Integer> countDeckCards(GameModel game);
+	void shuffle(Game game);
 }

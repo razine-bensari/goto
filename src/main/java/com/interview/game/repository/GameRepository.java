@@ -1,11 +1,7 @@
 package com.interview.game.repository;
 
-import java.util.List;
-import java.util.UUID;
-import com.interview.game.model.GameModel;
-import com.interview.game.model.PlayerModel;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.interview.game.model.Game;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface GameRepository extends JpaRepository<GameModel, UUID> {
-	List<GameModel> findGameModelsByPlayers(List<PlayerModel> players);
+public interface GameRepository extends MongoRepository<Game, String> {
 }

@@ -1,8 +1,11 @@
 package com.interview.game.domain;
 
+import lombok.Getter;
+
 /**
  * All available ranks for the cards in the game.
  */
+@Getter
 public enum Rank {
 	ACE(1),
 	TWO(2),
@@ -22,10 +25,6 @@ public enum Rank {
 
 	Rank(int value) {
 		this.value = value;
-	}
-
-	public int getValue() {
-		return value;
 	}
 
 	@Override

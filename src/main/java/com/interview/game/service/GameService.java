@@ -2,11 +2,8 @@ package com.interview.game.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
-import com.interview.game.model.GameModel;
-import com.interview.game.model.PlayerModel;
+import com.interview.game.model.Game;
 import com.interview.game.repository.GameRepository;
-import com.interview.game.util.GameUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,29 +19,23 @@ public class GameService {
 		this.gameRepository = gameRepository;
 	}
 
-	public GameModel createGame(GameModel gameModel) {
-		return gameRepository.save(gameModel);
+	public Game createGame(Game game) {
+		return gameRepository.save(game);
 	}
 
-	public Optional<GameModel> getGame(UUID id) {
+	public Optional<Game> getGame(String id) {
 		return gameRepository.findById(id);
 	}
 
-	public List<GameModel> getAllGames() {
+	public List<Game> getAllGames() {
 		return gameRepository.findAll();
 	}
 
-	public GameModel updateGame(GameModel gameModel) {
-		return gameRepository.save(gameModel);
+	public Game updateGame(Game game) {
+		return gameRepository.save(game);
 	}
 
-	public void deleteGame(UUID id) {
+	public void deleteGame(String id) {
 		gameRepository.deleteById(id);
-	}
-
-	public boolean playerCanBeDeleted(PlayerModel playerModel) {
-		return gameRepository.findGameModelsByPlayers(List.of(playerModel))
-				.stream()
-				.anyMatch(GameUtils::gameInProgress);
 	}
 }
